@@ -21,7 +21,21 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    :root {
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+    /*사용자 지정 값 사용시 일반적인 값의 자리에 var(--name)형식으로 값 제공*/
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
 
+    .hl {
+      color: var(--base);
+    }
     /*
       misc styles, nothing to do with CSS variables
     */
@@ -43,8 +57,22 @@
       width: 100px;
     }
   </style>
-
   <script>
+    const inputs = document.querySelectorAll('.controls input');
+
+    const handleUpdate = (e) => {
+      const suffix = e.path[0].dataset.sizing || ''; //spacing, blue는 Px, color의 경우 ''
+      console.log(`--${e.path[0].name}`, e.path[0].value+suffix);
+      document.documentElement.style.setProperty(`--${e.path[0].name}`, e.path[0].value + suffix);
+      //css에서 :root에 변수를 넣고 그 변수 값을 변경해주어서 스타일을 변경시켰다.
+    }
+
+    inputs.forEach(input => {
+      input.addEventListener('change', handleUpdate)
+      input.addEventListener('mousemove', handleUpdate);
+    });
+
+    
   </script>
 
 </body>
