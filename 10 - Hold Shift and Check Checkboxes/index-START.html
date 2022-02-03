@@ -110,8 +110,9 @@
         checkboxes.forEach(checkbox => {
           console.log(checkbox);
           if (checkbox === this || checkbox === lastChecked) {
+            //시작 checkbox일떄 InBetween이 true가 되고, 
             inBetween = !inBetween;
-            console.log('Starting to check them in between!');
+            //끝 checkbox일때 InBetween이 false가 됨.
           }
 
           if (inBetween) {
@@ -120,7 +121,7 @@
         });
       }
 
-      lastChecked = this;
+      lastChecked = e.target;
     }
 
     checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
